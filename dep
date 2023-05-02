@@ -1,0 +1,5 @@
+npx expo install axios react-native-dotenv
+
+npx expo install expo-font
+
+ npm install -g expo-cli
