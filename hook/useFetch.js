@@ -4,6 +4,7 @@ import { RAPID_API_KEY } from "@env";
 // import { RAPID_API_KEY } from "../envirenment";
 
 const rapidApiKey = RAPID_API_KEY;
+
 const useFetch = (endpoint, query) => {
   const [data, setDate] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +17,7 @@ const useFetch = (endpoint, query) => {
       "X-RapidAPI-Key": rapidApiKey,
       "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
     },
-    params: { ...query },
+    params: query,
   };
 
   const fetchData = async () => {
@@ -25,7 +26,6 @@ const useFetch = (endpoint, query) => {
     try {
       const response = await axios.request(options);
       setDate(response.data.data);
-      setIsLoading(false);
     } catch (error) {
       console.error(error);
       setError(error);

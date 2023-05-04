@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   pointText: {
     fontSize: SIZES.medium - 2,
-    color: COLORS.gray,
+    color: COLORS.primary,
     fontFamily: FONT.regular,
     marginLeft: SIZES.small,
   },
