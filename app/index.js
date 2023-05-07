@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, SafeAreaView } from "react-native";
+import { View, Text, ScrollView, SafeAreaView, StatusBar } from "react-native";
 import { Stack, useRouter } from "expo-router";
 import { useState } from "react";
 
@@ -45,6 +45,7 @@ const Home = () => {
           />
           <Popularjobs />
           <Nearbyjobs />
+          <StatusBar barStyle={"dark-content"} />
         </View>
       </ScrollView>
     </SafeAreaView>
