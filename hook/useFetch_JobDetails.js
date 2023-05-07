@@ -5,19 +5,21 @@ import { RAPID_API_KEY } from "@env";
 
 const rapidApiKey = RAPID_API_KEY;
 
-const useFetch = (endpoint, query) => {
-  const [data, setData] = useState([]);
+const useFetch_JobDetails = (id) => {
+  const [data, setDate] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const options = {
     method: "GET",
-    url: `https://jsearch.p.rapidapi.com/${endpoint}`,
+    url: `https://jsearch.p.rapidapi.com/job-details`,
     headers: {
       "X-RapidAPI-Key": rapidApiKey,
       "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
     },
-    params: { ...query },
+    params: {
+      job_id: id,
+    },
   };
 
   const fetchData = async () => {
@@ -25,12 +27,11 @@ const useFetch = (endpoint, query) => {
 
     try {
       const response = await axios.request(options);
-
-      setData(response.data.data);
-      setIsLoading(false);
+      setDate(response.data.data);
     } catch (error) {
+      console.error(error);
       setError(error);
-      console.log(error);
+      alert("There is an error");
     } finally {
       setIsLoading(false);
     }
@@ -48,4 +49,4 @@ const useFetch = (endpoint, query) => {
   return { data, isLoading, error, refetch };
 };
 
-export default useFetch;
+export default useFetch_JobDetails;
