@@ -7,6 +7,7 @@ import {
   ScrollView,
   ActivityIndicator,
   RefreshControl,
+  Share,
 } from "react-native";
 
 import {
@@ -67,6 +68,30 @@ const JobDetails = () => {
     }
   };
 
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          data[0]?.job_google_link ??
+          "https://careers.google.com/jobs/results/",
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+          console.log("yes");
+        } else {
+          // shared
+          console.log("Share fail");
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+        console.log("dismissed");
+      }
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
       <Stack.Screen
@@ -82,7 +107,11 @@ const JobDetails = () => {
             />
           ),
           headerRight: () => (
-            <ScreenHeaderBtn iconUrl={icons.share} dimension="60%" />
+            <ScreenHeaderBtn
+              iconUrl={icons.share}
+              dimension="60%"
+              handlePress={onShare}
+            />
           ),
           headerTitle: "",
         }}
